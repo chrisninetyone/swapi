@@ -14,3 +14,10 @@ const Vehicles = props =>
 	});
 
 export default Vehicles;
+
+//DATA NEEDED
+// Name
+// Model
+// Class
+// Number of Passengers
+// A button to “Favorite” the vehicle

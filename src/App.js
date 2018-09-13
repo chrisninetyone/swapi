@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import People from './People';
 import Planets from './Planets';
 import Vehicles from './Vehicles';
-import axios from 'axios';
 
 class App extends Component {
 	state = {
@@ -16,47 +15,10 @@ class App extends Component {
 		vehicles: [],
 		homeworld: []
 	};
-	handlePeople = () => {
-		const URL = `https://swapi.co/api/people/`;
-		fetch(URL)
-			.then(response => response.json())
-			.then(response => {
-				this.setState({ people: this.state.people.concat(response.results) });
-			})
-			.then(response => {
-				this.state.people.forEach(val => {
-					console.log(val.homeworld);
-					axios.get(val.homeworld).then(response => {
-						console.log('homeworld response', response.data.name);
-						this.setState({
-							homeworld: this.state.homeworld.concat(response.data.name)
-						});
-					});
-				});
-			});
-	};
 
-	handlePlanets = () => {
-		const URL = `https://swapi.co/api/planets/`;
-		fetch(URL)
-			.then(response => response.json())
-			.then(response => {
-				this.setState({ planets: this.state.planets.concat(response.results) });
-				console.log(response);
-			});
-	};
-
-	handleVehicles = () => {
-		const URL = `https://swapi.co/api/vehicles/`;
-		fetch(URL)
-			.then(response => response.json())
-			.then(response => {
-				this.setState({
-					vehicles: this.state.vehicles.concat(response.results)
-				});
-				console.log(response);
-			});
-	};
+// fetchPeople = () => {
+// 	const peoplePromise =
+// }
 
 	componentDidMount() {
 		const randomNum = Math.round(Math.random() * 6) + 1;
@@ -70,6 +32,20 @@ class App extends Component {
 					date: response.release_date
 				});
 			});
+			//fetch the other endpoints too
+			//promise.all()
+		const people = 'https://swapi.co/api/people/';
+		fetch(people)
+			.then(response => response.json())
+			.then(response => console.log('people', response));
+		const planets = 'https://swapi.co/api/planets/'
+			fetch(planets)
+				.then(response => response.json())
+				.then(response => console.log('planets', response))
+		const vehicles = 'https://swapi.co/api/vehicles/'
+			fetch(vehicles)
+				.then(response => response.json())
+				.then(response => console.log('vehicles', response))
 	}
 
 	render() {
@@ -100,11 +76,9 @@ class App extends Component {
 					<button>View Favorites</button>
 				</div>
 				<div>
-					<PeopleButton onClick={this.handlePeople}>People</PeopleButton>
-					<PlanetsButton onClick={this.handlePlanets}>Planets</PlanetsButton>
-					<VehiclesButton onClick={this.handleVehicles}>
-						Vehicles
-					</VehiclesButton>
+					<PeopleButton>People</PeopleButton>
+					<PlanetsButton>Planets</PlanetsButton>
+					<VehiclesButton>Vehicles</VehiclesButton>
 					<People people={this.state.people} homeworld={this.state.homeworld} />
 					<Planets planets={this.state.planets} />
 					<Vehicles vehicles={this.state.vehicles} />

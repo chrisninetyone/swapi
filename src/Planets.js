@@ -14,3 +14,12 @@ const Planets = props =>
 	});
 
 export default Planets;
+
+
+//DATA NEEDED
+//Name
+//Terrain
+// Population
+// Climate
+// Residents
+// A button to "Favorite" the person
