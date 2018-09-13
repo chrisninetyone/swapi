@@ -16,9 +16,40 @@ class App extends Component {
 		homeworld: []
 	};
 
-// fetchPeople = () => {
-// 	const peoplePromise =
-// }
+	fetchPeople = (homeworld) => {
+		const people = fetch('https://swapi.co/api/people/');
+		const people = people.map(val => {
+			return fetch(homeworld)
+				.then(response => response.json())
+				.then(response => console.log(response));
+		});
+		// fetch(people)
+		// 	.then(response => response.json())
+		// 	.then(response =>
+		// 		response.map(val => {
+		// 			return fetch(val.results);
+		// 		})
+		// 	)
+		// 	.catch(error => console.log(error));
+		return Promise.all(people);
+	};
+
+	fetchPlanets = () => {
+		const planets = 'https://swapi.co/api/planets/';
+		fetch(planets)
+			.then(response => response.json())
+			.then(response => {
+				return response
+			})
+			.catch(error => console.log(error));
+	};
+	// fetchVehicles = () => {
+	// 	const vehicles = 'https://swapi.co/api/vehicles/';
+	// 	fetch(vehicles)
+	// 		.then(response => response.json())
+	// 		.then(response => console.log('vehicles', response))
+	// 		.catch(error => console.log(error));
+	// };
 
 	componentDidMount() {
 		const randomNum = Math.round(Math.random() * 6) + 1;
@@ -32,21 +63,16 @@ class App extends Component {
 					date: response.release_date
 				});
 			});
-			//fetch the other endpoints too
-			//promise.all()
-		const people = 'https://swapi.co/api/people/';
-		fetch(people)
-			.then(response => response.json())
-			.then(response => console.log('people', response));
-		const planets = 'https://swapi.co/api/planets/'
-			fetch(planets)
-				.then(response => response.json())
-				.then(response => console.log('planets', response))
-		const vehicles = 'https://swapi.co/api/vehicles/'
-			fetch(vehicles)
-				.then(response => response.json())
-				.then(response => console.log('vehicles', response))
+
+		const planets =	this.fetchPlanets();
+		const people = this.fetchPeople()
+
+		
+		this.fetchPeople(planets);
+		// this.this.fetchVehicles();
 	}
+
+
 
 	render() {
 		const PeopleButton = styled.button`

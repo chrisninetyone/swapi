@@ -15,9 +15,9 @@ export default class People extends React.Component {
 				{this.props.homeworld.map(val => {
 					return val;
 				})}
-				{this.props.people.map(val => {
+				{/* {this.props.people.map(val => {
 					return <h3>Name: {val.name}</h3>;
-				})}
+				})} */}
 			</PeopleCard>
 		);
 	}
