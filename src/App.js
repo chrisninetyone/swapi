@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+`import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
 import People from './People';
@@ -67,7 +67,7 @@ class App extends Component {
 		const planets =	this.fetchPlanets();
 		const people = this.fetchPeople()
 
-		
+
 		this.fetchPeople(planets);
 		// this.this.fetchVehicles();
 	}
